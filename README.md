@@ -14,10 +14,9 @@ g++ -O2 -o wallet wallet.cpp libdb.a libsqlite3.a
 # ⚙️ Dependencies
 
 1. C++11 compiler
-2. Berkeley DB
-Requires Berkeley DB library (installation example: sudo apt install libdb-dev)
-3. I have packaged the Berkeley DB library as a static library, just link and compile.
-4. SQLite3 development kit, which is the library that must be used for parsing in the latest wallet.
+2. Berkeley DB The Berkeley DB library is required
+3. SQLite3 development kit, which is a library that must be used for parsing in the latest wallet. Installation example: sudo apt install libdb-dev libsqlite3-dev)
+4. I have packaged the Berkeley DB and SQLite3 libraries as static libraries, just link and compile.
 
 # Scan all .dat files in the current directory
 ```

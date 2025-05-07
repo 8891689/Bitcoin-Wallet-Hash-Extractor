@@ -10,6 +10,11 @@ A simple tool to extract encrypted master keys and salts from Bitcoin wallet fil
 ## Compile
 ```bash
 g++ -O2 -o wallet wallet.cpp libdb.a libsqlite3.a
+
+or
+
+g++ -O2 -o wallet_Details wallet_Details.cpp libdb.a libsqlite3.a
+
 ```
 # ⚙️ Dependencies
 
@@ -36,9 +41,61 @@ $bitcoin$64$6b45588e745d8490f2432c68533407e0f2040ff12debd840270f47543ad47c16$16$
 $bitcoin$64$f83d2783f238d5fde0e082e20686ff85cb92bb0737da214e2e39fd61b828bf6c$16$adfbb9cfa83e9cf6$135318$2$00$2$00
 ```
 
+# To view information such as the public key address and iteration count, please use the detailed version.
+```
+./wallet_Details 0.07.dat
+Info: Processing files specified on command line.
+========================================
+Processing file: 0.07.dat
+========================================
+Info: Attempting to open '0.07.dat' with BDB ('main' db) for format check...
+Info: Detected BDB format ('main' database opened).
+Info: Attempting to read all data from BDB: 0.07.dat
+Info: Successfully read 209 records from BDB.
+Info: Parsing 208 records from in-memory map...
+Info: Successfully parsed 'mkey' data.
+Info: Parsing complete. Found: 1 mkey, 101 keys, 1 names, 0 keymeta.
+
+--- Wallet Info: 0.07.dat ---
+Encryption Status: Encrypted
+  Salt: dff2b89e4d885c28
+  Derivation Method: 0
+  Derivation Iterations: 35714
+  JtR Hash: $bitcoin$64$617c4b22fabd578e0f4d030245a0cbebd9da426fbee49c2feb885fa190b65096$16$dff2b89e4d885c28$35714$2$00$2$00
+  Encrypted Master Key Data (Full Size: 48 bytes)
+
+Extracted Keys (101):
+Key #1:
+  Private Key: [Encrypted]
+  Public Key:  040477a76f008c9869899e0924ef185c5e41a8ca464a775b2e69be6a7a9ce8edd3cb6599ce9e0f9675c20c6ed42fd057ae43fc08c80e651ff82856ae949b312c8a (size 65 bytes)
+Key #2:
+  Private Key: [Encrypted]
+  Public Key:  0407a080418c2e24fe0f220e4eef1730ab0ef9039954ef0f4393a088ab56227f4fdf9bda5787ecb8de8c637fe2db1bc510568739046c7fc71ad9ffa1fb8928ce1f (size 65 bytes)
+.
+.
+.
+
+Key #100:
+  Private Key: [Encrypted]
+  Public Key:  04f9c512d95f18618e399132f8ab709a11f0100f3dee513c874119768aad1c29a9639b212b4c102edb08bdb267fc35e93233a2fd74e4122b7da06a19c80261e4e3 (size 65 bytes)
+Key #101:
+  Private Key: [Encrypted]
+  Public Key:  04fc18da237cc9ad2b568950a8bcd59b342bc84749f632e3616a4dc6a23aeb9c73fd12cabcdbb09ce1c91f2d05f37344565bb8d5647f8670e068ad8752422489a3 (size 65 bytes)
+
+Note: Private keys are encrypted and not shown in plain text.
+
+Extracted Addresses & Labels (1):
+Address #1: 12vdxXV3m5xRTi6vAAwMkQQkVL5rh9LESE
+--- End Wallet Info ---
+
+
+All specified files processed.
+```
+
 Notes
 1. Update support for new BTC wallets and make them compatible with old wallets, because the bitcoin2john.py script only supports old wallets and cannot extract the hash value of new wallets, so this project can only be redeveloped.
 2. The output results can be used for password recovery or cracking tools, such as Hashcat.
+
 
 # Acknowledgements
 
